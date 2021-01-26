@@ -8,7 +8,11 @@
 
 
 ## html 是谁发明的
-html 由Tim Berners-Lee发明
+html 由Tim Berners-Lee（蒂姆·伯纳斯·李）发明 
+
+2004年，英女皇伊丽莎白二世向伯纳斯·李颁发不列颠帝国勋章的爵级司令勋章。
+
+可以叫他李爵士
 
 ## html 起手
 ```html
@@ -73,8 +77,14 @@ html 由Tim Berners-Lee发明
 * tabindex 设置tabindex 可以 按键盘上的tab键  访问元素 
 * title  用来显示全部内容 
   
-
+### class
 class 的值是一个以空格分隔的元素的类名（classes ）列表，它允许 CSS 和 Javascript 通过类选择器 (class selectors) 或DOM方法( document.getElementsByClassName)来选择和访问特定的元素。
+
+### contenteditable
+我们可以将style标签放到body中。然后将style的display属性改成block。
+
+这样就可以在页面中显示style里面的内容了。通过中方式，我们可以在页面上直接修改css。
+
 
 tabindex 接收number 值
 按tab键 访问tabindex的顺序

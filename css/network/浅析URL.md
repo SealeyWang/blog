@@ -83,3 +83,16 @@ URL = 协议+域名或IP+端口号+路径+查询字符串+锚点 组成
 * 浏览器会默认省略 http的80端口  https的443端口
 
 
+
+## curl命令
+
+curl 是常用的命令行工具。用来请求 Web 服务器。它的名字就是客户端（client）的 URL 工具的意思。
+
+```
+curl https://www.example.com
+```
+过程是先根据url，请求DNS得到对应的IP，然后进行TCP连接，连接成功再发起HTTP请求。相应结束后关闭TCP连接，实现真正的结束。
+
+[参考博客](https://juejin.cn/post/6844903989096497160)
+
+

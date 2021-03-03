@@ -57,6 +57,123 @@ Number.MIN_VALUE:5e-324
 
 # String
 
+[ASCII](https://zh.wikipedia.org/wiki/ASCII)
+
+[字符编码笔记：ASCII，Unicode 和 UTF-8](http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html)
+
+[String](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+字符存储用编号表示，下图是ASCII 编码对应表
+
+
+![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d95d298d81a64c04a73c49bc729d899c~tplv-k3u1fbpfcp-watermark.image)
+
+ASCII 码一共规定了128个字符的编码（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的一位统一规定为0。
+
+
+* 0 用48 表示 
+* A 用65 表示 
+* a 用 97表示
+
+如何表示汉字
+
+GB2312（国标2312） 是中国国家标准局推出的中文 收录常用汉字、英文字母 日文假名。然而很多生僻字显示不了
+
+微软推出GBK(国标扩) ，可以显示生僻字 兼容GB2312
+
+后来为了解决全世界的文字推出了[Unicode(万国码)](https://en.wikipedia.org/wiki/Unicode) 
+
+Unicode 收录13万字符（大于16位），全世界通用。Unicode 只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。
+
+
+UTF-8 是Unicode的一种实现方式 推出UTF-8，-8意思是最少可用8位
+存一个字符。UTF-8在存储时可以存1到3个字节（通过第一个字节的信息，获取当前字符还有多少字节）
+
+UTF-8规则 
+1. 对于单字节的符号，字节的第一位设为0，后面7位为这个符号的 Unicode 码。因此对于英语字母，UTF-8 编码和 ASCII 码是相同的。
+2. n个字节 第一个字节前n位为1 n+1位为0 ，后面字节的前两位一律设为10 
+
+
+
+JavaScript使用阉割版的UFT-8,每个字符两个字节
+
+```javascript 
+'字符串' "字符串" `字符串`
+
+
+//`` 是模板字面量
+
+
+//使用 String 函数将其他值生成或转换成字符串
+
+String(thing)
+new String(thing)
+// thing
+任何可以被转换成字符串的值。
+
+
+
+//字符串转义
+//  \'   表示'
+// \" 表示"
+// \n 表示换行
+// \r 表示回车
+// \t 表示tab 制表符
+// \\ 表示 \
+// \uFFFF 表示对应的Unicode字符
+// \xFF 表示钱256个Unicode字符
+
+
+//通过是模板字面量，输入多行字符串
+
+let s=`用模板字面量
+可以轻松做到
+多行输入
+`
+// 没有`` 的时候 多行是用+ 或/  
+
+var longString = 'Long '
+  + 'long '
+  + 'long '
+  + 'string';
+
+
+var longString = 'Long \
+long \
+long \
+string';
+
+```
+
+```javascript 
+'123'.length  // 3
+'\n\r\t'.length //3   转义后只有3个字符
+''.length //0 空字符串length 是0
+' '.length // 1 空格也是字符
+
+
+// 通过下标读取字符串
+let s = 'hello'
+s[0] // h 
+s[5] // undefind 不报错
+
+```
+
+## base64转码
+
+
+
+```javascript
+// 字符串转为Base64编码的字符串
+window.btoa('wangshaoli18871074717@gmail.com')
+// "d2FuZ3NoYW9saTE4ODcxMDc0NzE3QGdtYWlsLmNvbQ=="
+// Base64编码的字符串转为原来的字符串
+window.a('d2FuZ3NoYW9saTE4ODcxMDc0NzE3QGdtYWlsLmNvbQ==')// "wangshaoli18871074717@gmail.com"
+
+```
+
+
+
 
 # Boolean
 
@@ -149,9 +266,31 @@ a1 !== a2 // true
 
 # BigInt
 
+是一种内置对象，它提供了一种方法来表示大于 253 - 1 的整数（这是Number表示的最大数字）。 BigInt 可以表示任意大的整数。
+
+```javascript
+//在一个整数字面量后面加 n 的方式定义一个 BigInt
+const theBiggestInt = 9007199254740991n;
+
+//调用BitInt 函数
+const alsoHuge = BigInt(9007199254740991);
+// ↪ 9007199254740991n
+
+// 接收16进制数
+const hugeHex = BigInt("0x1fffffffffffff");
+// ↪ 9007199254740991n
 
 
 
+// 接收二进制数
+const hugeBin = BigInt("0b11111111111111111111111111111111111111111111111111111");
+// ↪ 9007199254740991n
+
+
+```
+使用BitInt 和 Number 需要注意的地方
+* 不能用于 Math 对象中的方法
+* 不能和任何 Number 实例混合运算，两者必须转换成同一种类型。（BigInt 变量在转换成 Number 变量时可能会丢失精度。）
 
 
 

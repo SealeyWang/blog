@@ -162,13 +162,39 @@ s[5] // undefind 不报错
 ## base64转码
 
 
+[MIME（Multipurpose Internet Mail Extensions）"多用途互联网邮件扩展"](http://www.ruanyifeng.com/blog/2008/06/mime.html)
+
+[Base64](http://www.ruanyifeng.com/blog/2008/06/base64.html)
+
+早期电子邮件的传统格式不支持非ASCII编码和二进制数据，所以规定了内容传输编码 Content-transfer-encoding  可选值有"7bit"、"8bit"、"binary"、"quoted-printable"和"base64"----其中"7bit"是缺省值，即不用转化的ASCII字符
+
+
+base64是编码转换方式中的一种。选出64个字符----小写字母a-z、大写字母A-Z、数字0-9、符号"+"、"/"（再加上作为垫字的"="，实际上是65个字符）----作为一个基本字符集。然后，其他所有符号都转换成这个字符集中的字符。
+
+转换步骤
+
+ 1. 将每三个字节作为一组，一共是24个二进制位。
+ 2. 将这24个二进制位分为四组，每个组有6个二进制位。
+ 3. 在每组前面加两个00，扩展成32个二进制位，即四个字节。
+ 4. 根据下表，得到扩展后的每个字节的对应符号，这就是Base64的编码值。
+
+![base64编码](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75b90a7ee9c94fd59f4b157e713491a8~tplv-k3u1fbpfcp-watermark.image)
+
+
+Base64将三个字节转化成四个字节，因此Base64编码后的文本，会比原文本大出三分之一左右。
+
+两个字节处理方式 16位 分成三组（  6位 6位 4位）6位前面补2个0  4位前后各补2个0 转成base64编码后补一个 =
+
+一个字节处理方式 8位 分成2组（6位  2位） 6位前面加2个0，2位前面加2个0后面加4个0。转成base64编码后补一个 =
+
+
 
 ```javascript
 // 字符串转为Base64编码的字符串
 window.btoa('wangshaoli18871074717@gmail.com')
-// "d2FuZ3NoYW9saTE4ODcxMDc0NzE3QGdtYWlsLmNvbQ=="
+// "d2FuZ3NoYW9saTE4ODcxMDc0NzE3QGdtYWlsLmNvbQ1"
 // Base64编码的字符串转为原来的字符串
-window.a('d2FuZ3NoYW9saTE4ODcxMDc0NzE3QGdtYWlsLmNvbQ==')// "wangshaoli18871074717@gmail.com"
+window.atob('d2FuZ3NoYW9saTE4ODcxMDc0NzE3QGdtYWlsLmNvbQ==')// "wangshaoli18871074717@gmail.com"
 
 ```
 

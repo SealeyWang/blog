@@ -226,15 +226,24 @@ if(!a){
 ```
 如果是 否定运算的对象是Number String Object 咋办
 
+
+## falsy 值
+
 falsy 值 (虚值) 是在 Boolean 上下文中认定为 false 的值。
 JavaScript 在需要用到布尔类型值的上下文中使用强制类型转换(Type Conversion )将值转换为布尔值。 if() while()
 
 
-false undefind null 0 NaN ''  
+1. undefind 
+2. null 
+3. 0 
+4. NaN 
+5. ''  
 
 空字符串有 '' ""  ``
 
 0 有 -0  0n(BigInt的0)
+
+他们都被认为是false
 
 ```javascript
 
@@ -317,6 +326,354 @@ const hugeBin = BigInt("0b11111111111111111111111111111111111111111111111111111"
 使用BitInt 和 Number 需要注意的地方
 * 不能用于 Math 对象中的方法
 * 不能和任何 Number 实例混合运算，两者必须转换成同一种类型。（BigInt 变量在转换成 Number 变量时可能会丢失精度。）
+
+
+
+# 数据类型转换 
+
+[数据类型转换 ](https://www.jianshu.com/p/ca95ab518635)
+
+
+## 转换为string
+
+
+### 使用toString 
+
+```javascript
+// 1. number
+var n = 100
+n.toString() // "100"
+// 2. boolean
+var b = true
+b.toString() // "true"
+// 3. null
+null.toString() // 报错：Cannot read property 'toString' of null
+// 4. undefined
+undefined.toString() // 报错：Cannot read property 'toString' of undefined
+// 5. object
+var obj = {name: 'xxx'}
+obj.toString() // "[object Object]" 无法得到想要的结果
+
+
+```
+
+```javascript
+
+//console.log 等函数实际上就是使用了 toString，如果发现不是字符串，会自动调用 toString 这个API来转换成字符串
+console.log(100) 
+// 实际上是
+console.log((100).toString())
+obj[1]
+// 实际上是
+obj[(1).toString()]
+```
+
+### 通过 + ''  转换成String
+```javascript
+
+
+// 1. number
+var n = 100
+n + '' // "100"
+// 2. boolean
+var b = true
+b + '' // "true"
+// 3. null
+null + '' // "null"
+// 4. undefined
+undefined + '' // "undefined"
+// 5. object
+var obj = {name: 'xxx'}
+obj + '' // "[object Object]"
+
+//  + 的左右两边如果发现任意一边有字符串，它就会尝试把另外一边也变成字符串
+1 + "1" // "11"
+```
+
+
+### 通过全局函数 String   转换成String类型
+
+```javascript
+// 1. number
+var n = 100
+String(n) // "100"
+// 2. boolean
+var b = true
+String(b) // "true"
+// 3. null
+String(null) // "null"
+// 4. undefined
+String(undefined) // "undefined"
+// 5. object
+var obj = {name: 'xxx'}
+String(obj) // "[object Object]"
+
+
+```
+
+
+## 转化为boolean
+
+
+### 通过全局函数 Boolean
+```javascript
+// 5 个falsy 是false  除此之外别的都是true
+Boolean(0) // false
+Boolean(null) // false
+Boolean(undefined)//false
+Boolean('')//false
+Boolean(NaN)// false 
+
+
+//number
+Boolean(1) // true
+
+//string
+Boolean('1') // true
+Boolean('0') // true
+
+//object
+var obj = {name: 'xxx'}
+Boolean(obj) // true
+Boolean([]) // true
+Boolean({}) // true 
+```
+
+
+### 通过 !(逻辑非) 运算符
+
+```javascript
+// 5个falsy 值
+!!0 //false
+!!NaN //false
+!!null //false
+!!undefined //false
+!!'' //false
+
+
+//number
+!!1 // true
+
+//string
+!!'1' // true
+!!'0' // true
+
+//object
+var obj = {name: 'xxx'}
+!!obj // true
+!![] // true
+!!{} // true 
+
+```
+
+## 转换为number
+
+
+### 通过全局函数Number
+
+
+[科学计数法](https://zh.wikipedia.org/wiki/%E7%A7%91%E5%AD%A6%E8%AE%B0%E6%95%B0%E6%B3%95)
+在电脑或计算器中一般用EXP或E（Exponential）来表示10的幂：
+
+7.823E5=782300
+1.2e−4=0.00012
+
+
+
+```javascript 
+// 1. number
+Number(1) // 1
+Number(NaN) // NaN
+
+// 2. string
+Number('1') // 1
+Number('NaN') // NaN
+Number() // 0
+Number('') // 0
+Number('123abc') // NaN
+Number('0.1') // 0.1
+Number('1.2e+2') // 123
+Number(' 123  ') // 123
+Number(' 12 3  ') // NaN
+
+// 3. boolean
+Number(true) // 1
+Number(false) // 0
+
+
+// 4. null
+Number(null) // 0
+
+// 5. undefined
+Number(undefined) // NaN
+
+
+// 6. object
+Number({}) // NaN
+Number([]) // 0
+Number([1,2]) // NaN
+Number([1]) // 1
+Number(['1']) // 1
+Number([true])// NaN
+Number([undefined]) // 0
+Number([null]) // 0
+Number(['']) // 0
+```
+
+### 通过全局函数[parseInt](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt)
+
+
+
+转换为整数，parseInt 的参数都是字符串，如果不是则会先被转化成字符串
+
+
+
+```javascript
+// 1. number
+parseInt(1) // 1
+parseInt(NaN) // NaN
+parseInt(Infinity) // NaN
+parseInt(-1.23) // -1
+parseInt(0x100) // 256，里面参数都是字符串，等同于 parseInt(String(0x100))
+
+// 2. string
+parseInt('1') // 1
+parseInt('NaN') // NaN
+parseInt('') // NaN
+parseInt('123abc') // 123
+parseInt('0.1') // 0
+parseInt('1.2e+2') // 1 科学计数法视为字符串
+parseInt(0.0000000000001) // 1 科学计数法视为字符串
+parseInt(10000.5) // 1000
+parseInt(' 123  ') // 123
+parseInt(' 12 3  ') // 12
+parseInt('+1') // 1
+parseInt('.1') // NaN
+parseInt('0x100') // 256，0x或者0X开头按照16进制解析
+parseInt('0100') // 100，0开头仍然按照10进制解析
+parseInt('011') // 11，0开头的数字不当做8进制，忽略0
+// 字符串只转换为头部可以转换为数字的部分，不然返回NaN
+
+
+// 3. boolean
+parseInt(true) // NaN
+parseInt(false) // NaN
+
+// 4. null
+parseInt(null) // NaN
+
+// 5. undefined
+parseInt(undefined) // NaN
+
+// 6. object
+parseInt({}) // NaN
+parseInt([]) // NaN
+parseInt([1,2]) // 1
+parseInt([1]) // 1
+parseInt(['1']) // 1
+parseInt([true]) // NaN
+parseInt([undefined]) // NaN
+parseInt([null]) // NaN
+parseInt(['']) // NaN
+
+```
+
+`parseInt(string, radix);`
+
+string 要被解析的值。如果参数不是一个字符串，则将其转换为字符串(使用 [ToString](https://262.ecma-international.org/6.0/#sec-tostring)  抽象操作)。字符串开头的空白符将会被忽略。
+
+radix 从 2 到 36，表示字符串的基数。例如指定 16 表示被解析值是十六进制数。请注意，10不是默认值！
+
+radix取值范围为2-36的整数，超出这个范围的整数，则返NaN。如果不是数值或者整数，会被自动转化成一个整数，如果是 
+0，null，undefined，NaN 和 Infinity
+
+```javascript
+
+//radix 默认值不是 10 
+
+// 以0x 0X 开头 radix被假定为16   0x 后面的部分当做16进制数解析
+parseInt('0x10') // 16  
+
+// radix被假定为8（八进制）或10（十进制）。具体选择哪一个radix取决于实现。ECMAScript 5 规定应该使用 10 (十进制) 但不是所有的浏览器都支持。因此，在使用 parseInt 时，一定要指定一个 radix。
+parseInt('010') // 10   IE chorme firefox 都是10 
+
+//如果输入的 string 以任何其他值开头， radix 是 10 (十进制)。
+parseInt('100') // 100
+
+// 如果第一个字符不能转换为数字，parseInt会返回 NaN。
+parseInt('A1') // NaN  10进制解析不了A
+parseInt('A1',16) //161  16进制才能解析A
+
+
+//参数范围为2-36的整数，超出这个范围的整数, 则返NaN
+parseInt('100', 40)// NaN  
+parseInt('100', 1) // NaN
+
+// 如果不是数值或者整数，会被自动转化成一个整数
+parseInt('100', 2.8) // 4  
+parseInt('100', '2.8') // 4   
+
+// 如果是 0，null，undefined，NaN 和 Infinity，则radix默认为10。
+parseInt('100', 0) // 100
+parseInt('100', null) // 100
+parseInt('100', undefined) // 100
+parseInt('100', NaN) // 100
+parseInt('100', Infinity) // 100
+
+```
+
+
+### 全局函数 parseFloat
+
+```javascript
+
+parseFloat('1.23') // 1.23
+parseFloat('123e-2') // 1.23 可正确转换科学计数法
+parseFloat('1.23abc') // 1.23
+parseFloat('abc1.23') // NaN
+parseFloat (' 1.23 ') // 1.23
+parseFloat (' 1.23 4.56') // 1.23
+```
+
+
+### 快捷的方法
+
+#### -0 
+```javascript
+
+'1.23' - 0 // 1.23
+'a123' - 0 // NaN
+'123a' - 0 // NaN
+' 123 ' - 0 // 123
+'Infinity' - 0 // Infinity
+true - 0 // 1
+false - 0 // 0
+null - 0 // 0
+undefined - 0 // NaN
+[1] - 0 // 1
+[1,2] - 0 // NaN
+
+```
+
+#### + 
+```javascript
++ '1.23' // 1.23
++ 'a123' // NaN
++ '123a' // NaN
++ ' 123 ' // 123
++ 'Infinity' // Infinity
++ true // 1
++ false // 0
++ null // 0
++ undefined // NaN
++ [1] // 1
++ [1,2] // NaN
+```
+
+
+
+
+
 
 
 

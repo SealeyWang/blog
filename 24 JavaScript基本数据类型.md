@@ -670,10 +670,38 @@ undefined - 0 // NaN
 + [1,2] // NaN
 ```
 
+#### Number.toString
+
+[Number.prototype.toString()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
+
+`numObj.toString([radix])`
 
 
+radix
+指定要用于数字到字符串的转换的基数(从2到36)。如果未指定 radix 参数，则默认值为 10。
+
+如果对象是负数，则会保留负号。即使radix是2时也是如此：返回的字符串包含一个负号（-）前缀和正数的二进制表示，不是 数值的二进制补码。
+
+进行数字到字符串的转换时，建议用小括号将要转换的目标括起来，防止出错。
+
+```javascript
 
 
+var count = 10;
+
+console.log(count.toString());    // 输出 '10'
+console.log((17).toString());     // 输出 '17'
+console.log((17.2).toString());   // 输出 '17.2'
+
+var x = 6;
+
+console.log(x.toString(2));       // 输出 '110'
+console.log((254).toString(16));  // 输出 'fe'
+
+console.log((-10).toString(2));   // 输出 '-1010'
+console.log((-0xff).toString(2)); // 输出 '-11111111'
+
+```
 
 
 

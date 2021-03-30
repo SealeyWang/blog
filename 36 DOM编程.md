@@ -307,3 +307,9 @@ js线程 div对象所有属性 叫 property
 * 不是标准属性 只会在一开始相等
 * attribute 只支持字符串
 * property 支持字符串 布尔
+
+
+# 扩展
+
+[为什么说DOM操作很慢](https://segmentfault.com/a/1190000004114594)
+[为什么经过10年的努力DOM操作还是这么慢](https://stackoverflow.com/questions/6817093/but-whys-the-browser-dom-still-so-slow-after-10-years-of-effort)

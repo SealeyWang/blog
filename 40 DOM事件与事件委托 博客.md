@@ -18,7 +18,7 @@
 ```javascript
 
 fn(e){
-    
+     
 }
 
 el.addEventListener('click',fn,bool){

@@ -287,6 +287,24 @@ webpack config merge 工具也能合并 webpack 配置
 
 # webpack loader plugin difference
 
+**webpack loader 和 webpack plugin 的区别？**
+webpack loader 是用来加载文件的，webpack plugin 是用来扩展 webpack 的功能的。
+
+loader 主要是用来加载一个个的文件，比如说可以加载 js 文件，把 js 文件转义成低版本浏览器可以支持的 js, 它可以用来加载 css 文件，把 css 变成页面上的标签。它可以加载图片文件，对图片做一些优化
+
+Plugin 是用来加强 webpack 功能的，比如说 HtmlWebpackPlugin 插件可以生成 html
+文件，MiniCssExtractPlugin 用来把 css 合并成一个 css 文件的
+套路
+
+1. 翻译 loader 是加载器，plugin 是插件
+2. 中文解释 loader 是用来加载文件的 plugin 是用来加强功能的
+3. 举例
+   1. css-loader 把 css 文件读取到 JS 内存中
+   2. style-loader 把 css-loader 读取到的内容，创建一个 style 标签放到 head 里
+   3. image-loader
+   4. HtmlWebpackPlugin 用来生成 html 文件
+   5. MiniCssExtractPlugin 用来把多个 css 合并成一个 css
+
 https://stackoverflow.com/questions/37452402/webpack-loaders-vs-plugins-whats-the-difference
 
 Loaders do the pre-processing transformation of virtually any file format when you use sth like require("my-loader!./my-awesome-module") in your code. Compared to plugins, they are quite simple as they (a) expose only one single function to webpack and (b) are not able to influence the actual build process.
@@ -301,3 +319,8 @@ loader 会对任何文件格式进行预处理转换。 与插件相比，它们
 
 plugins： 插件可以深入集成到 webpack 中，因为它们可以在 webpack 构建系统中注册钩子（hooks），访问、修改编译器 ，如何更好的完成编译。
 因此，它们功能更强大，但也更难以维护。
+
+# 如何实现懒加载？
+
+用 import() 去加载文件，然后得到一个 promise，then()函数写成功做什么， catch()
+函数写失败做什么

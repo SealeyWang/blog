@@ -26,11 +26,7 @@ Vue React 借助虚拟 DOM 对比 只把 20 个添加到 DOM 上
 # 虚拟 DOM 有什么缺点
 
 需要额外的创建函数 如 React createElement 或 Vue h
-但是，可以通过 JSX 或 .vue 文件简化写法。但是又需要 babel / vue-loader 去编译，这样就严重依赖打包工具，添加额外的构建流程
-
-# 为什么虚拟 DOM 比 DOM 快?
-
-## 可以减少 DOM 操作
+但是，可以通过 JSX 或 .vue 文件简化写法。但是又需要 babel / vue-loader 去编译，这样就严重依赖打包工具，增加额外的构建流程
 
 # 真实的 DOM 和虚拟 DOM 谁更慢
 
@@ -46,6 +42,8 @@ react 1000 个 的时候比原生快
 
 DOM diff 就是一个 函数 patch
 patches = patch (oldVNode, newVNode)
+
+patches 是需要运行的 DOM 操作
 
 patches 可能是这样
 
@@ -80,7 +78,7 @@ patches 可能是这样
 
 # DOM diff 的优点
 
-保持完整的结构,有利于性能的提升
+与虚拟 DOM 结合 对比出新、旧虚拟 DOM 的不同之处，以及分析出需要改变的操作，可以减少不必要 DOM 的操作，在一定规模性，有利于性能的提升
 
 # DOM diff 的问题
 
@@ -105,3 +103,19 @@ patches 可能是这样
 [React 虚拟 Dom 和 diff 算法](https://juejin.cn/post/6844903529161850893)
 
 [React 源码剖析系列 － 不可思议的 react diff](https://zhuanlan.zhihu.com/p/20346379)
+
+# 为什么虚拟 DOM 比 DOM 快?
+
+**减少 DOM 操作的次数**
+
+虚拟 DOM 可以把多次操作合并成一次操作，
+比如添加 1000 个节点，一个个操作就会慢。
+而把 1000 个节点一次性放到 DOM 上就会快
+
+**减少 DOM 操作的范围**
+
+虚拟 DOM 借助 DOM diff 把多余的操作省略
+添加 1000 个节点 其实只有 20 个节点是新增的。
+Vue React 借助虚拟 DOM 对比 只把 20 个添加到 DOM 上
+
+所以虚拟 DOM 比 DOM 快

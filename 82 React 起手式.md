@@ -4,8 +4,6 @@
 
 ```javascript
 
-<script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.2/umd/react.development.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.2/umd/react-dom-server.browser.development.js"></script>
 
 
 yarn add react react-dom

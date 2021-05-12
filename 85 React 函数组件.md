@@ -16,7 +16,7 @@ function Hello(props) {
 
 # 没有 state 怎么办
 
-React v16.8.0 退出 Hooks API
+React v16.8.0 推出 Hooks API
 
 其中有一个 API 叫 useState 可以解决没有 state 的问题
 
@@ -26,7 +26,7 @@ const [n, setN] = React.useState(0);
 
 # 没有生命周期怎么办 Hooks API
 
-React v16.8.0 退出 Hooks API
+React v16.8.0 推出 Hooks API
 
 中有一个 API 叫 useEffect 可以解决生命周期的问题
 

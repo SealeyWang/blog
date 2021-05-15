@@ -54,7 +54,7 @@ useState 会从新 x 读取 n 的最新值
 
 ## 实现最简单的 useState
 
-[代码提交记录]()
+github commit[实现最简单的 React.useState](https://github.com/CaoBaoWang/react-hooks-demo1/blob/d022a60443a5c29e8e4d5f72770895fe428a81e9/src/index.js)代码
 
 ```jsx
 import React from "react";
@@ -95,6 +95,8 @@ const App = () => {
 render();
 ```
 
+这个实现有问题，只能使用一个 State
+
 ## 一个组件用了多个 useState 怎么办
 
 数据都在\_state 里 都是一样的值，用不了多个。
@@ -122,6 +124,8 @@ React 把\_state & index 放在对应的虚拟节点对象上。让每个对象�
 
 组件更新流程
 ![组件更新流程](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/493938f0479f494fa9526529cd149726~tplv-k3u1fbpfcp-watermark.image)
+
+github commit[解决 myUseState 存储多个值](https://github.com/CaoBaoWang/react-hooks-demo1/commit/885dc107fdaffb93e3b2256d1d0d80dd8d9d5da7)
 
 ```jsx
 import React from "react";

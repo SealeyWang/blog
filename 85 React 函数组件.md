@@ -96,10 +96,11 @@ export default App3;
 ```
 
 其它生命周期怎么模拟
-constructor
+
+**constructor**
 函数组件执行的时候，就相当于 constructor
 
-shouldComponentUpdate
+**shouldComponentUpdate**
 后面的 React.memo 和 useMemo 可以解决
 
 render

@@ -109,6 +109,8 @@ render
 
 ## 自定义 Hook 完全模拟 componentDidUpdate （state props 初始化不算变化）
 
+React 规范 use 开头的函数就是自定义 Hook
+
 实现功能
 
 ```jsx

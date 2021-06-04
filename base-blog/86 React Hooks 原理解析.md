@@ -82,7 +82,7 @@ const App = () => {
 
   const addN = () => {
     setN(n + 1);
-  };
+  }
 
   return (
     <div>

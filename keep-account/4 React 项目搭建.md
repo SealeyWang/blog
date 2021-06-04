@@ -185,3 +185,22 @@ try {
 // 需要安装
 yarn add --dev @types/webpack-env
 ```
+
+# build & deploy
+
+`yarn global add serve` 添加静态服务器
+
+`serve -s build` 以 build 为跟目录创建静态网站
+
+路径问题 create react app build path
+
+package.json add
+`"homepage": "https://caobaowang.github.io/keep-account-website/",`
+
+## deploy.sh
+
+bash shebang
+`#!/usr/bin/env bash`
+
+powershell shebang
+`#!/usr/bin/env powershell`

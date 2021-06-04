@@ -131,7 +131,7 @@ useEffect(副作用)对环境的改变就是副作用。 比如
 // 模拟 componentDidMount
 useEffect(() => {
   console.log("App3 mount");
-}, []);
+}, []); //[] 里变量变化执行 => 不会执行
 ```
 
 ## 模拟 componentDidUpdate
@@ -175,11 +175,17 @@ useEffect(() => {
 ```jsx
 // 模拟 componentWillUnmount
 useEffect(() => {
-  console.log("Child第一次渲染");
+  console.log("Child渲染了");
   return () => {
     console.log("Child组件要死了");
   };
-});
+}); //任何一个state变化都执行
+```
+
+```jsx
+useEffect(() => {
+  console.log("第一次渲染执行");
+}, []); //[] 里变量变化执行 => 不会执行
 ```
 
 ## useLayoutEffect

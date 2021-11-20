@@ -1,22 +1,11 @@
 # 自我介绍
-我叫wsl
+
+我叫汪少立
 
 我的爱好
-* 拳击
-* 打游戏
+
+- 拳击
 
 我的职业
-1. android 开发
-2. 前端开发
 
-前端代码
-
-`console.log(111)`
-
-
-android 代码
-```java
-Intent intent = new Intent(this,MainActivity.class)
-startActivity(intent)
-
-```
+1. 前端开发 曾做 android 开发

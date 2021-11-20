@@ -146,6 +146,7 @@ webstorm plugin `styled components`
 
 # svg symbols
 
+[使用 svg-sprite-loader、svgo-loader 优化项目中的 Icon](https://juejin.cn/post/6854573215646875655)
 `yarn eject` 永久添加项目配置文件
 
 使用 svg-sprite-loader 加载 svg

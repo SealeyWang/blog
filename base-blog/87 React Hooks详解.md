@@ -113,10 +113,49 @@ setN((i) => i + 1);
 
 # useEffect (副作用)
 
+为函数组件增加了执行副作用的能力
+
+## 副作用的解释
+
+```js
+function f1() {} // 没有作用的函数
+
+//  有副作用的函数，就是依赖了不知道从哪来的东西的函数， 有可能产生意外的结果
+function f2() {
+  console.log(1); // 依赖了 console， 依赖的东西不是函数传进来的   如果有一天console被改了 有可能出现意想不到的结果
+}
+
+//没有副作用的 函数（也叫纯函数）。 不依赖外部属性和方法的函数
+function f3(a, b) {
+  return a + b;
+}
+```
+
 useEffect(副作用)对环境的改变就是副作用。 比如
 `document.title = xxx` 。
 
 其实叫 afterRender 更好理解。每次 render 之后就会调用
+
+```js
+import React from "react";
+import "./styles.css";
+import { useEffect } from "react";
+
+// 先打印2 再打印1
+export default function App() {
+  useEffect(() => {
+    console.log(1);
+  });
+
+  return (
+    <div className="App">
+      {console.log(2)}
+      <h1>Hello CodeSandbox</h1>
+      <h2>Start editing to see some magic happen!</h2>
+    </div>
+  );
+}
+```
 
 使用 useEffect 可以模拟 类组件的生命周期
 
@@ -503,9 +542,11 @@ const onClickChild = React.useMemo(() => {
 
 ## useCallback
 
-由于 useMemo(fn,arr) 的第一个参数必须是 fn，如果再返回一个 fn 会很难用`userMemo(()=> (x)=>console.log(x))`。
+**useCallback 出现的原因**
+由于 useMemo(fn,arr) 的第一个参数必须是 fn，如果再返回一个 fn 会很难用（写着奇怪，函数再返回函数）
+`userMemo(()=> (x)=>console.log(x))`。
 
-所以有了 useCallback(fn) fn 就是要返回的函数。其他等价于 useMemo
+所以有了 useCallback(fn,arr) fn 就是要返回的函数。其他等价于 useMemo
 
 ```jsx
 const onCLickChild = React.useCallback(() => {

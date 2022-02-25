@@ -21,8 +21,8 @@
   ```
 
 - 箭头函数
-    - `const sum = (a, b) => a + b`
-    - `nums.forEach( v => { console.log(v) })`
+  - `const sum = (a, b) => a + b`
+  - `nums.forEach( v => { console.log(v) })`
 - 展开操作符
 
   ```javascript
@@ -95,16 +95,16 @@
 ## Promise 的用法
 
 ```javascript
- function fn() {
-    return new Promise((resolve, reject) => {
-        成功时调用
-        resolve(数据)
-        失败时调用
-        reject(错误)
-    })
+function fn() {
+  return new Promise((resolve, reject) => {
+    成功时调用;
+    resolve(数据);
+    失败时调用;
+    reject(错误);
+  });
 }
 
-fn().then(success, fail).then(success2, fail2)
+fn().then(success, fail).then(success2, fail2);
 ```
 
 ## Promise.all 的用法
@@ -137,66 +137,67 @@ Promise.race([promise1, promise2]).then(success1, fail1);
 
 ```javascript
 function throttle(fn, delay) {
-    let canUse = true
-    return function () {
-        if (canUse) {
-            fn.apply(this, arguments)
-            canUse = false
-            setTimeout(() => canUse = true, delay)
-        }
+  let canUse = true;
+  return function (...args) {
+    if (canUse) {
+      fn.apply(this, ...args);
+      canUse = false;
+      setTimeout(() => (canUse = true), delay);
     }
+  };
 }
 
-const throttled = throttle(() => console.log(1), 200)
-throttled()
-throttled()
-
+const throttled = throttle(() => console.log(1), 200);
+throttled();
+throttled();
 ```
 
 ## 防抖
 
-防抖： 通过setTimeout 的方式，在一定的时间间隔内，将多次触发变成一次触发；
+防抖： 通过 setTimeout 的方式，在一定的时间间隔内，将多次触发变成一次触发；
 
-在第一次触发事件时，不立即执行函数，而是给出一个期限值比如200ms
+在第一次触发事件时，不立即执行函数，而是给出一个期限值比如 200ms
 
-- 如果在200ms内没有再次触发滚动事件，那么就执行函数
-- 如果在200ms内再次触发滚动事件，那么当前的计时取消，重新开始计时
+- 如果在 200ms 内没有再次触发滚动事件，那么就执行函数
+- 如果在 200ms 内再次触发滚动事件，那么当前的计时取消，重新开始计时
 
 效果： 如果短时间内大量触发同一事件，只会执行一次函数
+
 ```javascript
 function debounce(fn, delay) {
-    let timerId = null
-    return function () {
-        const context = this
-        if (timerId) {
-            window.clearTimeout(timerId)
-        }
-        timerId = setTimeout(() => {
-            fn.apply(context, arguments)
-            timerId = null
-        }, delay)
+  let timerId = null;
+  return function (...args) {
+    const context = this;
+    if (timerId) {
+      window.clearTimeout(timerId);
     }
+    timerId = setTimeout(() => {
+      fn.apply(context, args);
+      timerId = null;
+    }, delay);
+  };
 }
 
-const debounced = debounce(() => console.log(1), 100)
-debounced()
-debounced()
+const debounced = debounce(() => console.log(1), 100);
+debounced();
+debounced();
 ```
 
-# 手写AJAX 
+# 手写 AJAX
 
 ```javascript
-let request = new XMLHttpRequest()
-request.open('GET','/a/b?name=wsl',true)
-request.onreadystatechange = function (){
-    if(request.readyState === XMLHttpRequest.DONE && request.status === 200 ) {
-        console.log(request.responseText)   
-    }
-}
-request.send()
+let request = new XMLHttpRequest();
+request.open("GET", "/a/b?name=wsl", true);
+request.onreadystatechange = function () {
+  if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+    console.log(request.responseText);
+  }
+};
+request.send();
 ```
 
-# 判断this 是什么
+# 判断 this 是什么
+
 ```
 fn()
 this => window/global

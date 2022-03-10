@@ -1,3 +1,10 @@
+# 常用命令
+
+```powershell
+# 查看运行状态
+ wsl.exe --list --verbose
+```
+
 # Windows10 WSL Ubuntu 忘记 root 密码如何重置
 
 关闭 Ubuntu 窗口
@@ -9,6 +16,10 @@
 输入 passwd your_username ，确认密码。
 
 关闭 WSL。 exit
+
+# WSL 安装 mongodb
+
+[install mongodb](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-database#install-mongodb)
 
 # wsl2 配置使用 windows 网络代理
 
@@ -50,3 +61,40 @@ windows 端代理软件配置
 # Linux 安装 nodejs
 
 https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
+
+# 释放 win10 子系统 WSL2 的磁盘空间
+
+https://loesspie.com/2021/01/27/wsl2-compact-disk-win10/
+
+```powershell
+wsl --shutdown
+
+diskpart  # 进入
+
+
+select vdisk file="your ext4.vhdx  path"
+
+compact vdisk
+
+detach vdisk
+
+```
+
+# wsl 备份与恢复
+
+```powershell
+wsl -l
+适用于 Linux 的 Windows 子系统分发版:
+Ubuntu-18.04 (默认)
+。。。
+
+# 停止wsl
+wsl --shutdown
+
+# 备份指定系统到指定位置
+wsl --export Ubuntu-18.04 d:\Ubuntu-18.04.tar
+
+# 还原指定系统
+wsl --import Ubuntu-18.04 d:\Ubuntu-18.04.tar
+
+```

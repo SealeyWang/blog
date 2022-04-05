@@ -28,21 +28,21 @@ AText = text + attribs 用于描述完整的文档内容
 atext= { text: '\n\nxx\nyyy\n', attribs: '*0|2+2*0*7+2*0|1+1*0*i+3|1+1' }
 ```
 
-\*0 是用户属性
+`*0` 是用户属性
 
-\*0|2+2 表示 用两个字节换 2 行，带有用户属性 （表示\n\n 两个换行符，且有用户属性）
+`*0|2+2` 表示 用两个字节换 2 行，带有用户属性 （表示\n\n 两个换行符，且有用户属性）
 
-\*7 是 ib_bold 属性
+`*7` 是 ib_bold 属性
 
-\*0\*7+2 两个字节（xx）带有 author 和 ib_bold 属性
+`*0\*7+2` 两个字节（xx）带有 author 和 ib_bold 属性
 
-\*0|1+1 xx 后换行 不多说了
+`*0|1+1` xx 后换行 不多说了
 
-\*i 对应 ibStrikethrough 属性 (十进制 18)
+`*i` 对应 ibStrikethrough 属性 (十进制 18)
 
-\*0\*i+3 对应 yyy 有 author 和 ibStrikethrough
+`*0\*i+3` 对应 yyy 有 author 和 ibStrikethrough
 
-|1+1 表示换行 （代表一个换行符 \n）
+`|1+1` 表示换行 （代表一个换行符 \n）
 
 ## Apool
 
@@ -174,7 +174,7 @@ apool= AttributePool {
 OP Doc
 ![OP Doc](./image/../img/opDoc.png)
 
-# Follow 函数
+# Follow 函数的数学理论
 
 当用户 A 和 B 在他们的屏幕上拥有相同的文档 X，
 并且他们继续制作各自的变更集(Changeset) A 和 B，
@@ -244,3 +244,5 @@ A 保留 7 'l' `B'=[0, 'e',2,3,7]`, B 没保留 7 插入'ow' `B'=[0,'e',2,3,'ow'
 注意: B' 的角标 是 XA ('basil')的角标
 
 最终结果 'besiow'
+
+# 系统概览

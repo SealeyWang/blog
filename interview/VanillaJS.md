@@ -136,16 +136,17 @@ Promise.race([promise1, promise2]).then(success1, fail1);
 注意，有些地方认为节流函数不是立刻执行的，而是在冷却时间末尾执行的（相当于施法有吟唱时间），那样说也是对的。
 
 ```javascript
-function throttle(fn, delay) {
+const throttle = (fn, delay) => {
   let canUse = true;
   return function (...args) {
+    const context = this;
     if (canUse) {
-      fn.apply(this, ...args);
+      fn.apply(context, args);
       canUse = false;
       setTimeout(() => (canUse = true), delay);
     }
   };
-}
+};
 
 const throttled = throttle(() => console.log(1), 200);
 throttled();

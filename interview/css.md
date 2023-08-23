@@ -73,7 +73,7 @@ css 盒模型 从外到内 依次是 margin border padding content
   .clearfix:after {
     content: "";
     display: block; /*或者 table*/
-    clear: both;
+    clear: both;·
   }
   .clearfix {
     zoom: 1; /* IE 兼容*/

@@ -578,14 +578,14 @@ count.value;
 props 不包含 ref（大部分时候不需要） ，所以函数组件需要 forwardRef
 
 ```jsx
-const Button =(props)=>{
+const Button =(props)=> {
   return <button ></button>
 }
 
 const buttonRef = useRef(null)
 
 //会报错 函数组件不能接受ref
-<button ref={buttonsRef}>按钮</button>
+<button ref={buttonRef}>按钮</button>
 
 // 使用forwardRef拿到 useRef
 

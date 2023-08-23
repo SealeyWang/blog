@@ -16,7 +16,8 @@
 
 如何用 Redux 通信？
 
-通过 store.dispatch 触发 action , reducers 处理完 action，返回新的 state 。 通过 store.subscribe(render) 当 state 变化的时候，重新渲染，所有组件就感知到了变化。 （可以用 useEffect 监听变化 做一些操作，不知道对不对）
+通过 store.dispatch 触发 action , reducers 处理完 action，返回新的 state 。 通过 store.subscribe(render) 当 state
+变化的时候，重新渲染，所有组件就感知到了变化。 （可以用 useEffect 监听变化 做一些操作，不知道对不对）
 
 # shouldComponentUpdate 有什么用
 
@@ -26,11 +27,50 @@
 
 # 虚拟 DOM 是什么？
 
-虚拟 DOM 就是用来模拟 DOM 的一个对象，这个对象拥有一些重要属性，并且更新 UI 主要就是通过对比（DIFF）旧的虚拟 DOM 树 和新的虚拟 DOM 树的区别完成的。
+虚拟DOM就是虚拟节点。
 
-## 什么是虚拟 DOM
+React用JS对象模拟真实DOM节点，然后渲染成真实的DOM节点
 
-在 React 中，render 执行的结果得到的并不是真正的 DOM 节点，结果仅仅是轻量级的 JavaScript 对象，我们称之为 virtual DOM。
+1. jsx 语法 其实就是虚拟节点
+
+```js
+<div id="x">
+    <span class="red">hi</span>
+</div>
+
+```
+
+2. createElement 函数 把JSX的虚拟节点 生成 js 对象
+
+```js
+React.createElement("div", {id: "x"},
+    React.createElement("span", {class: "red"}, "hi")
+)
+```
+
+3. 生成的js对象
+
+```js
+obj = {
+    tag: 'div',
+    props: {
+        id: 'x'
+    },
+    children: [
+        {
+            tag: 'span',
+            props: {
+                className: 'red'
+            },
+            children: [
+                'hi'
+            ]
+        }
+    ]
+}
+```
+
+## 虚拟DMO原理是什么？
 
 # Redux 是什么
 
@@ -74,33 +114,39 @@ react 的 state 都是单向数据流 ， 不直接修改原 state，而是创�
 不应该出现的类型, switch 判断 type 时候 没有匹配上 返回值设为 never 。 好处是 当修改了类型后，编译通不过
 
 ```javascript
-interface Foo {
-  type: "foo";
+interface
+Foo
+{
+    type: "foo";
 }
 
-interface Bar {
-  type: "bar";
+interface
+Bar
+{
+    type: "bar";
 }
 
-type All = Foo | Bar;
+type
+All = Foo | Bar;
 
 function handleValue(val: All) {
-  switch (val.type) {
-    case "foo":
-      // 这里 val 被收窄为 Foo
-      break;
-    case "bar":
-      // val 在这里是 Bar
-      break;
-    default:
-      // val 在这里是 never
-      const exhaustiveCheck: never = val;
-      break;
-  }
+    switch (val.type) {
+        case "foo":
+            // 这里 val 被收窄为 Foo
+            break;
+        case "bar":
+            // val 在这里是 Bar
+            break;
+        default:
+            // val 在这里是 never
+            const exhaustiveCheck: never = val;
+            break;
+    }
 }
 
 //  修改类型后,多了一个类型Baz 如果没有处理Switch 编译会报错，never不是 All
-type All = Foo | Bar | Baz;
+type
+All = Foo | Bar | Baz;
 ```
 
 ## TypeScript 比起 JavaScript 有什么优点？
@@ -124,7 +170,8 @@ TypeScript 提供了类型约束，因此更可控、更容易重构、更适合
 
 ## React 合成事件概念
 
-React 合成事件：是 React 模拟原生 DOM 事件所有能力的一个事件对象。-> 浏览器原生事件跨浏览器包装器。 它根据 W3C 规范 来定义合成事件，兼容所有浏览器，拥有与浏览器原生事件相同的接口。
+React 合成事件：是 React 模拟原生 DOM 事件所有能力的一个事件对象。-> 浏览器原生事件跨浏览器包装器。 它根据 W3C 规范
+来定义合成事件，兼容所有浏览器，拥有与浏览器原生事件相同的接口。
 
 `const button = <button onClick={handleClick}>Leo 按钮</button>`
 在 React 中，所有事件都是合成的，不是原生 DOM 事件，但可以通过 e.nativeEvent 属性获取 DOM 事件。
@@ -137,6 +184,7 @@ const button = <button onClick={handleClick}>Leo 按钮</button>;
 **为什么会出现这个技术**
 
 1. 进行浏览器兼容，实现更好的跨平台
-   1. React 采用的是顶层事件代理机制，能够保证冒泡一致性，可以跨浏览器执行。React 提供的合成事件用来抹平不同浏览器事件对象之间的差异，将不同平台事件模拟合成事件。
+    1. React 采用的是顶层事件代理机制，能够保证冒泡一致性，可以跨浏览器执行。React 提供的合成事件用来抹平不同浏览器事件对象之间的差异，将不同平台事件模拟合成事件。
 2. 避免垃圾回收
-   1. 事件对象可能会被频繁创建和回收，因此 React 引入事件池，在事件池中获取或释放事件对象。即 React 事件对象不会被释放掉，而是存放进一个数组中，当事件触发，就从这个数组中弹出，避免频繁地去创建和销毁(垃圾回收)。
+    1. 事件对象可能会被频繁创建和回收，因此 React 引入事件池，在事件池中获取或释放事件对象。即 React
+       事件对象不会被释放掉，而是存放进一个数组中，当事件触发，就从这个数组中弹出，避免频繁地去创建和销毁(垃圾回收)。

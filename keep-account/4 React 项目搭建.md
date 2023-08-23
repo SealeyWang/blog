@@ -1,6 +1,6 @@
 # 项目搭建
 
-yarn config set registry https://registry.npm.taobao.org/
+yarn config set registry https://registry.npmmirror.com/
 
 create-react-app 简写为 cra
 

@@ -10,4 +10,6 @@ nvm alias <name> <version> ## 给不同的版本号添加别名
 nvm unalias <name> ## 删除已定义的别名
 nvm reinstall-packages <version> ## 在当前版本 node 环境下，重新 全局安装指定版本号的 npm 包
 nvm alias default [node 版本号] ##设置默认版本
+
+nvm proxy http://127.0.0.1:7079 # nvm 设置代理 不然查询版本，下载挺费劲
 ```

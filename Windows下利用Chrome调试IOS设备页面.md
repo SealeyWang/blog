@@ -34,7 +34,4 @@ iOS 端打开 safari 浏览器；PC 端打开 Chrome，进入 chrome://inspect/#
 此时刷新 iOS 页面，在 Chrome 中可看到 iOS 当前的页面地址，点击 inspect 即可进入调试页面。
 
 提示：
-在首次点击 inspect 若出现白屏，似乎要爬一下梯
-————————————————
-版权声明：本文为 CSDN 博主「ccczxacxzxcz」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/ruohua3kou/article/details/105172890
+在首次点击 inspect 若出现白屏，似乎要爬一下梯（代理）
